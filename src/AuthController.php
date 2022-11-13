@@ -1,65 +1,70 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Http\Request;
-use App\Models\User;
+use Tulparstudyo\Response;
 
 class AuthController extends Controller
 {
 	public function create(Request $request){
-		$fields = $request->validate( [
-			'name'=>'required|string',
-			'email'=>'required|string',
-			'password'=>'required|string',
-			'token'=>'required|string'
-		]);
-		if($fields['token'] && $fields['token']==env('AUTH_TOKEN','')){
-			if(!empty($fields['token'])){
-				$user = User::create([
-					'name'=>$fields['name'],
-					'email'=>$fields['email'],
-					'password'=>bcrypt($fields['password']),
-				]);
+		$exception = '';
+		try {
+			return  Response::success('Kullanıcı oluşturmak için user servisini kullanınız');
 
-				$token = $user->createToken('myAppToken')->plainTextToken;
-				return [
-					'user'=>	$user,
-					'token'=> $token
-				];
+			/*
+			$fields = $request->validate( [
+				'name'=>'required|string',
+				'email'=>'required|string',
+				'password'=>'required|string',
+				'token'=>'required|string'
+			]);
+			if($fields['token'] && $fields['token']==env('AUTH_TOKEN','')){
+				if(!empty($fields['token'])){
+					$user = create_user($fields);
+					if($user){
+						return Response::success('Kullanıcı Oluşturuldu', $user);
+					}
+				}
 			}
+			*/
+		} catch(\Illuminate\Database\QueryException $ex){
+			$exception = $ex->getMessage();
+		} catch (\Exception $ex){
+			$exception = $ex->getMessage();
 		}
-		return [
-			'error token',
-		];
+		return Response::failure($exception);
 	}
 	public function login(Request $request){
-
-		$fields = $request->validate( [
-			'name'=>'required|string',
-			'email'=>'required|string',
-			'password'=>'required|string'
-		]);
-		$user = User::where('email', $fields['email'])->first();
-		if($user){
-			if(Hash::check($fields['password'], $user->password)) {
+		$exception = '';
+		try {
+			$fields = $request->validate( [
+				'name'=>'required|string',
+				'email'=>'required|string',
+				'password'=>'required|string'
+			]);
+			$user = find_user($fields);
+			if($user){
 				$token = $user->createToken('myAppToken')->plainTextToken;
-				return [
-					'user'=>	$user,
-					'token'=> $token
-				];
+				return Response::success("Token Oluşturuldu", ['token'=>$token]);
 			}
+			return  Response::failure('Kulllanıcı bulunamadı');
+		} catch(\Illuminate\Database\QueryException $ex){
+			$exception = $ex->getMessage();
+		} catch (\Exception $ex){
+			$exception = $ex->getMessage();
 		}
-		return [
-			'error account: '.bcrypt($fields['password'])
-		];
+		return Response::exception( $exception);
 	}
 	public function logout(Request $request){
-		auth()->user()->tokens()->delete();
-		return [
-			'status'=>1,
-			'message'=>'Logout'
-		];
+		$exception = '';
+		try {
+			auth()->user()->tokens()->delete();
+			return  Response::success('Oturum Sonlandırıldı');
+		} catch (\Exception $ex){
+			print_r($ex);
+			$exception = $ex->getMessage();
+		}
+		return Response::exception($exception);
 	}
 }
