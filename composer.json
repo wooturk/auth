@@ -1,0 +1,32 @@
+{
+    "name": "tulparstudyo/auth",
+    "description": "Tulparstudyo auth",
+    "keywords": [
+        "tulparstudyo",
+        "auth"
+    ],
+    "homepage": "https://github.com/tulparstudyo/auth",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ahmet Hamdi Bayrak",
+            "email": "ahmethamdibayrak@hotmail.com",
+            "homepage": "https://tulparstudyo.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/tulparstudyo/auth"
+    },
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "ext-xmlwriter": "*",
+        "ext-dom": "*",
+        "ext-tokenizer": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
