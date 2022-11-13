@@ -14,9 +14,8 @@ use App\Http\Controllers\AuthController;
 |
 */
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/create', [AuthController::class, 'create']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
 	Route::get('/logout', [AuthController::class, 'logout']);
-
 });
