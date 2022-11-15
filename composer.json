@@ -1,22 +1,22 @@
 {
-    "name": "tulparstudyo/auth",
-    "description": "Tulparstudyo auth",
+    "name": "wooturk/auth",
+    "description": "Wooturk auth",
     "keywords": [
-        "tulparstudyo",
+        "wooturk",
         "auth"
     ],
-    "homepage": "https://github.com/tulparstudyo/auth",
+    "homepage": "https://github.com/wooturk/auth",
     "license": "MIT",
     "authors": [
         {
             "name": "Ahmet Hamdi Bayrak",
             "email": "ahmethamdibayrak@hotmail.com",
-            "homepage": "https://tulparstudyo.com",
+            "homepage": "https://wooturk.com",
             "role": "Developer"
         }
     ],
     "support": {
-        "issues": "https://github.com/tulparstudyo/auth"
+        "issues": "https://github.com/wooturk/auth"
     },
     "require": {
         "php": "^7.2 || ^8.0",

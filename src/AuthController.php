@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Tulparstudyo\Response;
+use Wooturk\Response;
 
 class AuthController extends Controller
 {
@@ -12,22 +12,6 @@ class AuthController extends Controller
 		try {
 			return  Response::success('Kullanıcı oluşturmak için user servisini kullanınız');
 
-			/*
-			$fields = $request->validate( [
-				'name'=>'required|string',
-				'email'=>'required|string',
-				'password'=>'required|string',
-				'token'=>'required|string'
-			]);
-			if($fields['token'] && $fields['token']==env('AUTH_TOKEN','')){
-				if(!empty($fields['token'])){
-					$user = create_user($fields);
-					if($user){
-						return Response::success('Kullanıcı Oluşturuldu', $user);
-					}
-				}
-			}
-			*/
 		} catch(\Illuminate\Database\QueryException $ex){
 			$exception = $ex->getMessage();
 		} catch (\Exception $ex){

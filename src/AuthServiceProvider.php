@@ -1,6 +1,6 @@
 <?php
 
-namespace Tulparstudyo;
+namespace Wooturk;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
