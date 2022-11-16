@@ -13,9 +13,10 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/create', [AuthController::class, 'create']);
+
+Route::post('/login/', [AuthController::class, 'login'])->name('login');
+Route::post('/create/', [AuthController::class, 'create']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
-	Route::get('/logout', [AuthController::class, 'logout']);
+	Route::get('/logout/', [AuthController::class, 'logout']);
 });
