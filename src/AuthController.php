@@ -29,7 +29,7 @@ class AuthController extends Controller
 			]);
 			$user = find_user($fields);
 			if($user){
-				$token = $user->createToken('myAppToken')->plainTextToken;
+				$token = $user->createToken('wooturkToken')->plainTextToken;
 				return Response::success("Token Oluşturuldu", ['token'=>$token]);
 			}
 			return  Response::failure('Kulllanıcı bulunamadı');
