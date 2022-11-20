@@ -20,6 +20,7 @@ class AuthController extends Controller
 		return Response::failure($exception);
 	}
 	public function login(Request $request){
+
 		$exception = '';
 		try {
 			$fields = $request->validate( [
